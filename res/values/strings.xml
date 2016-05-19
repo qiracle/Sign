@@ -22,6 +22,7 @@
        <string name="picDescription">this is a picture</string>
        <string name="generate">点击生成二维码</string>
       <string name="scanResult">扫描结果:</string>
+        <string name="exitLogin">退出登录</string>
 
     <drawable name="clr_normal">#FFFF00</drawable>
     <drawable name="clr_pressed">#75e067</drawable>

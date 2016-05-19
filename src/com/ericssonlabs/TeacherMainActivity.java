@@ -15,6 +15,8 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.zxing.encoding.EncodingHandler;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import qq.qiracle.qwords.MainActivity;
 import qq.qiracle.qwords.R;
 import qq.qiracle.systemservice.SystemService;
 import qq.qiracle.systemservice.SystemServiceImpl;
@@ -32,7 +35,7 @@ import qq.qiracle.userservice.ServiceRulesException;
 
 
 public class TeacherMainActivity extends Activity {
-
+	Button btnExitTeacher;
 	TextView teacher_num;
 	private ImageView qrImgImageView;
 	private static final int IMAGE_HALFWIDTH = 20;
@@ -52,7 +55,46 @@ public class TeacherMainActivity extends Activity {
 		
 		qrImgImageView = (ImageView) this.findViewById(R.id.iv_qr_image);
 	    teacher_num = (TextView) this.findViewById(R.id.tv_teacher);
-		
+		 btnExitTeacher = (Button) findViewById(R.id.btn_exit_teacher);
+		 btnExitTeacher.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(TeacherMainActivity.this);
+					
+					dialogBuilder.setTitle("注意！");
+					dialogBuilder.setMessage("您确定要退出吗？");
+				
+					dialogBuilder.setPositiveButton("确定", 
+							new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							
+						Intent intent	=new Intent(TeacherMainActivity.this,MainActivity.class);
+						
+						startActivity(intent);
+						finish();
+						}
+					});
+					dialogBuilder.setNegativeButton("取消", 
+							new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							
+						}
+					});
+					
+					
+					
+					dialogBuilder.show();
+					
+					
+				}
+			});
+	    
+	    
 		Intent intent = getIntent();
 		teacherNum = intent.getStringExtra("TeacherNum");
 		teacher_num.setText("您好，您的教工号为"+teacherNum);

@@ -8,7 +8,7 @@
 
 package qq.qiracle.userservice;
 
-//10.105.2.44
+//10.105.2.44 10.105.2.44
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;

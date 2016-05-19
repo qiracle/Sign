@@ -5,13 +5,12 @@
     android:background="@drawable/bg1"
     android:orientation="vertical" >
 
-<TextView
-    android:layout_marginTop="10dp" 
-    android:id="@+id/tv_user"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="18sp"
-    />  
+    <TextView
+        android:id="@+id/tv_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_scan_barcode"
@@ -19,8 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_sign"
-        android:text="@string/sign"
-         >
+        android:text="@string/sign" >
     </Button>
 
     <LinearLayout
@@ -43,5 +41,21 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/btn_exit"
+            android:text="@string/exitLogin" />
+
+    </RelativeLayout>
 
 </LinearLayout>

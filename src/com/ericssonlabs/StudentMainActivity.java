@@ -2,10 +2,8 @@ package com.ericssonlabs;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.util.Hashtable;
 
 import com.google.zxing.BarcodeFormat;
@@ -16,9 +14,10 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.zxing.activity.CaptureActivity;
 
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -34,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import qq.qiracle.qwords.MainActivity;
 import qq.qiracle.qwords.R;
 import qq.qiracle.userservice.ServiceRulesException;
 import qq.qiracle.userservice.UserService;
@@ -45,6 +45,7 @@ public class StudentMainActivity extends Activity {
 	private TextView usertext;
 	private EditText qrStrEditText;
 	private ImageView qrImgImageView;
+	private Button btnExit;
 	private static final int IMAGE_HALFWIDTH = 20;
 	int[] pixels = new int[2 * IMAGE_HALFWIDTH * 2 * IMAGE_HALFWIDTH];
 	private Bitmap mBitmap;
@@ -64,8 +65,45 @@ public class StudentMainActivity extends Activity {
 	
 		resultTextView = (TextView) this.findViewById(R.id.tv_scan_result);
 		usertext = (TextView) findViewById(R.id.tv_user);
+	 btnExit = (Button) findViewById(R.id.btn_exit);
 		
+	 btnExit.setOnClickListener(new OnClickListener() {
 		
+		@Override
+		public void onClick(View v) {
+AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(StudentMainActivity.this);
+			
+			dialogBuilder.setTitle("注意！");
+			dialogBuilder.setMessage("您确定要退出吗？");
+		
+			dialogBuilder.setPositiveButton("确定", 
+					new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+				Intent intent	=new Intent(StudentMainActivity.this,MainActivity.class);
+				
+				startActivity(intent);
+				finish();
+				}
+			});
+			dialogBuilder.setNegativeButton("取消", 
+					new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+				}
+			});
+			
+			
+			
+			dialogBuilder.show();
+			
+			
+		}
+	});
 		
 	
 		

@@ -172,31 +172,34 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int bg=0x7f020000;
         public static final int bg1=0x7f020001;
         public static final int bg_border1=0x7f020002;
-        public static final int btn_login=0x7f020003;
-        public static final int btn_sign=0x7f020004;
-        public static final int clr_normal=0x7f020012;
-        public static final int clr_pressed=0x7f020013;
-        public static final int delete=0x7f020005;
-        public static final int delete_gray=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int menubg=0x7f020008;
-        public static final int navbar=0x7f020009;
-        public static final int putao2=0x7f02000a;
-        public static final int qiandao=0x7f02000b;
-        public static final int saomiao=0x7f02000c;
-        public static final int shadow=0x7f02000d;
-        public static final int txt_lock_icon=0x7f02000e;
-        public static final int txt_person_icon=0x7f02000f;
-        public static final int txtborder=0x7f020010;
-        public static final int zhuye=0x7f020011;
+        public static final int btn_exit=0x7f020003;
+        public static final int btn_login=0x7f020004;
+        public static final int btn_sign=0x7f020005;
+        public static final int clr_normal=0x7f020013;
+        public static final int clr_pressed=0x7f020014;
+        public static final int delete=0x7f020006;
+        public static final int delete_gray=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int menubg=0x7f020009;
+        public static final int navbar=0x7f02000a;
+        public static final int putao2=0x7f02000b;
+        public static final int qiandao=0x7f02000c;
+        public static final int saomiao=0x7f02000d;
+        public static final int shadow=0x7f02000e;
+        public static final int txt_lock_icon=0x7f02000f;
+        public static final int txt_person_icon=0x7f020010;
+        public static final int txtborder=0x7f020011;
+        public static final int zhuye=0x7f020012;
     }
     public static final class id {
-        public static final int action_settings=0x7f050033;
+        public static final int action_settings=0x7f050035;
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f050006;
-        public static final int btn_add_qrcode=0x7f050031;
+        public static final int btn_add_qrcode=0x7f050032;
         public static final int btn_cancel_scan=0x7f050014;
+        public static final int btn_exit=0x7f050030;
+        public static final int btn_exit_teacher=0x7f050034;
         public static final int btn_scan_barcode=0x7f05002e;
         public static final int cb_ischeck=0x7f050020;
         public static final int clear=0x7f05002b;
@@ -214,7 +217,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int et_reg_pwds=0x7f050026;
         public static final int et_reg_user=0x7f050023;
         public static final int fullscreen=0x7f050003;
-        public static final int iv_qr_image=0x7f050032;
+        public static final int iv_qr_image=0x7f050033;
         public static final int launch_product_query=0x7f05000c;
         public static final int left=0x7f050000;
         public static final int list_view=0x7f050018;
@@ -241,7 +244,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int slidingmenumain=0x7f05002c;
         public static final int topname=0x7f050019;
         public static final int tv_scan_result=0x7f05002f;
-        public static final int tv_teacher=0x7f050030;
+        public static final int tv_teacher=0x7f050031;
         public static final int tv_user=0x7f05002d;
         public static final int viewfinder_view=0x7f050013;
         public static final int word_result=0x7f050016;
@@ -271,6 +274,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_name=0x7f080000;
         public static final int classSign=0x7f08000d;
         public static final int clear=0x7f08000e;
+        public static final int exitLogin=0x7f080014;
         public static final int generate=0x7f080012;
         public static final int login=0x7f080005;
         public static final int login_pwd=0x7f080004;

@@ -167,6 +167,8 @@ public class Fragment1 extends Fragment {
 										getActivity().setResult(0,intent);
 										
 										startActivity(intent);
+										
+										getActivity().finish();
 
 									}else{
 										
@@ -208,7 +210,7 @@ public class Fragment1 extends Fragment {
 										getActivity().setResult(10,intent);
 								
 										startActivity(intent);
-
+										getActivity().finish();
 									}else{
 										
 										getActivity().runOnUiThread(new Runnable() {
