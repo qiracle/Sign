@@ -1,9 +1,21 @@
+
+//======================================================================
+ //
+ //        Copyright (C) 2016   
+ //        All rights reserved
+ //
+ //        filename :Fragment2
+ //        
+ //
+ //        created by Qiangqiang Jinag in  2016.04
+ //        https://github.com/qiracle
+ //		   qiracle@foxmail.com
+ //
+ //======================================================================
+
 package qq.qiracle.qwords.fragment;
-/*Copyright (C) 2016.4
- * 
- *author:Qiangqiang Jiang
- * 
- */
+
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

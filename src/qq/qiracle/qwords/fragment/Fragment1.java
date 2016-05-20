@@ -1,9 +1,19 @@
+
+//======================================================================
+ //
+ //        Copyright (C) 2016   
+ //        All rights reserved
+ //
+ //        filename :Fragment1
+ //        
+ //
+ //        created by Qiangqiang Jinag in  2016.04
+ //        https://github.com/qiracle
+ //		   qiracle@foxmail.com
+ //
+ //======================================================================
 package qq.qiracle.qwords.fragment;
-/*Copyright (C) 2016.4
- * 
- *author:Qiangqiang Jiang
- * 
- */
+
 import com.ericssonlabs.StudentMainActivity;
 import com.ericssonlabs.TeacherMainActivity;
 
