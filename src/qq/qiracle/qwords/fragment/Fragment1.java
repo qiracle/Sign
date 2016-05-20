@@ -8,6 +8,7 @@ import com.ericssonlabs.StudentMainActivity;
 import com.ericssonlabs.TeacherMainActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
@@ -15,9 +16,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +29,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import qq.qiracle.bordercast.NetWorkChangeReceiver;
 import qq.qiracle.qwords.R;
 import qq.qiracle.qwords.utils.Util;
 import qq.qiracle.userservice.ServiceRulesException;
@@ -63,7 +63,8 @@ public class Fragment1 extends Fragment {
 
 	private RadioGroup rg_group;
 	private UserService userService = new UserServiceImpl();
-
+	private NetWorkChangeReceiver netWorkChangeReceiver =new NetWorkChangeReceiver();
+	private IntentFilter intentFilter;
 	@SuppressWarnings("deprecation")
 	private void init() {
 		topText = (TextView) view.findViewById(R.id.topname);
@@ -108,6 +109,13 @@ public class Fragment1 extends Fragment {
 		}
 
 	}
+	public void netWork(){
+		
+		intentFilter = new IntentFilter();
+		intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+		getActivity().registerReceiver(netWorkChangeReceiver, intentFilter);
+	}
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -116,7 +124,8 @@ public class Fragment1 extends Fragment {
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
 				RelativeLayout.LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
-
+		
+	
 		init();
 
 		rememberPwd();
@@ -126,6 +135,8 @@ public class Fragment1 extends Fragment {
 			@Override
 			public void onClick(View v) {
 
+				netWork();
+				
 				final String name = et_login_user.getText().toString().trim();
 				final String pwd = et_login_pwd.getText().toString().trim();
 
@@ -276,5 +287,15 @@ public class Fragment1 extends Fragment {
 		return view;
 
 	}
+
+	@Override
+	public void onDestroy() {
+		
+		super.onDestroy();
+		getActivity().unregisterReceiver(netWorkChangeReceiver);
+	}
+	
+	
+	
 
 }
