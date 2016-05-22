@@ -32,8 +32,8 @@ import org.json.JSONObject;
 
 import com.ericssonlabs.StudentMainActivity;
 
-import qq.qiracle.qwords.fragment.Fragment1;
-import qq.qiracle.qwords.fragment.Fragment2;
+import qq.qiracle.fragment.Fragment1;
+import qq.qiracle.fragment.Fragment2;
 
 public class UserServiceImpl implements UserService {
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		
 		
 	HttpClient client = new DefaultHttpClient();
-		String uri = "http://10.105.2.44:8080/AndroidServer/login";
+		String uri = "http://192.168.1.106:8080/AndroidServer/login";
 		HttpPost post = new HttpPost(uri);
 		/**
 		 * 
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 		
 		
 		HttpClient client = new DefaultHttpClient();
-		String uri = "http://10.105.2.44:8080/AndroidServer/modifyPwd";
+		String uri = "http://192.168.1.106:8080/AndroidServer/modifyPwd";
 		HttpPost post = new HttpPost(uri);
 		JSONObject object = new JSONObject();
 		object.put("LoginName", loginName);
@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
 		 * 
 		 */
 		HttpClient client = new DefaultHttpClient();
-		String uri = "http://10.105.2.44:8080/AndroidServer/sign";
+		String uri = "http://192.168.1.106:8080/AndroidServer/sign";
 		HttpPost post = new HttpPost(uri);
 		/**
 		 * 

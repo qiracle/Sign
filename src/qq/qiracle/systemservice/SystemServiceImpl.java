@@ -37,7 +37,7 @@ public class SystemServiceImpl implements SystemService{
 	@Override
 	public boolean setStringQrcode(String StringQrcode) throws Exception {
 		HttpClient client = new DefaultHttpClient();
-		String uri = "http://10.105.2.44:8080/AndroidServer/receiveQrcode";
+		String uri = "http://192.168.1.106:8080/AndroidServer/receiveQrcode";
 		HttpPost post = new HttpPost(uri);
 		
 		/**
@@ -46,6 +46,7 @@ public class SystemServiceImpl implements SystemService{
 		 */
 		JSONObject object = new JSONObject();
 		object.put("StringQRcode", StringQrcode);
+		
 		
 	BasicNameValuePair parameter = new BasicNameValuePair("Qrcode", object.toString());
 		
@@ -64,6 +65,10 @@ public class SystemServiceImpl implements SystemService{
 			
 		}
 		String result = EntityUtils.toString(response.getEntity(),"UTF-8");
+		
+//		JSONObject jsonobject= new JSONObject(result);
+//		String sessionid = jsonobject.getString("sessionid");
+		
 		System.out.println("---"+result);
 		if(result.equals("isOk")){
 			return true;

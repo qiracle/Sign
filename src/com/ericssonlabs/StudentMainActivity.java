@@ -33,7 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import qq.qiracle.qwords.MainActivity;
+import qq.qiracle.main.MainActivity;
 import qq.qiracle.qwords.R;
 import qq.qiracle.userservice.ServiceRulesException;
 import qq.qiracle.userservice.UserService;
@@ -49,7 +49,7 @@ public class StudentMainActivity extends Activity {
 	private static final int IMAGE_HALFWIDTH = 20;
 	int[] pixels = new int[2 * IMAGE_HALFWIDTH * 2 * IMAGE_HALFWIDTH];
 	private Bitmap mBitmap;
-	private final String IMAGE_TYPE = "image/*";
+
 
 	private final int IMAGE_CODE = 0;
 	private final int SCANER_CODE = 1;
