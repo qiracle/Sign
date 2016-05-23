@@ -37,7 +37,7 @@ public class SystemServiceImpl implements SystemService{
 	@Override
 	public boolean setStringQrcode(String StringQrcode) throws Exception {
 		HttpClient client = new DefaultHttpClient();
-		String uri = "http://192.168.1.106:8080/AndroidServer/receiveQrcode";
+		String uri = "http://10.105.2.44:8080/AndroidServer/receiveQrcode";
 		HttpPost post = new HttpPost(uri);
 		
 		/**

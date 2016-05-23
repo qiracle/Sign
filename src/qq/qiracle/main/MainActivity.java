@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.Window;
+import qq.qiracle.fragment.Fragment1;
 import qq.qiracle.fragment.MenuFragment;
 import qq.qiracle.qwords.R;
-
-
 
 public class MainActivity extends SlidingFragmentActivity {
 
@@ -28,7 +27,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		setBehindContentView(R.layout.menu);
 		setContentView(R.layout.content);
 
-		
+		/*默认显示第一个Fragment*/
+	Fragment1 f1 =new Fragment1();
+	getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f1).commit();
 	
 		sm = getSlidingMenu();
 
@@ -42,12 +43,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
 		MenuFragment menuFragment = new MenuFragment();
-		
+
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, menuFragment, "Menu").commit();
-		
-		
-		
-		
+
 	}
 
 	@Override

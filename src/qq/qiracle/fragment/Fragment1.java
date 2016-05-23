@@ -134,7 +134,7 @@ public class Fragment1 extends Fragment {
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
 				RelativeLayout.LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
-		
+		netWork();
 	
 		init();
 
@@ -145,7 +145,7 @@ public class Fragment1 extends Fragment {
 			@Override
 			public void onClick(View v) {
 
-				netWork();
+				
 				
 				final String name = et_login_user.getText().toString().trim();
 				final String pwd = et_login_pwd.getText().toString().trim();
@@ -298,12 +298,12 @@ public class Fragment1 extends Fragment {
 
 	}
 
-//	@Override
-//	public void onDestroy() {
-//		
-//		super.onDestroy();
-//		getActivity().unregisterReceiver(netWorkChangeReceiver);
-//	}
+	@Override
+	public void onDestroy() {
+		
+		super.onDestroy();
+		getActivity().unregisterReceiver(netWorkChangeReceiver);
+	}
 	
 	
 	
