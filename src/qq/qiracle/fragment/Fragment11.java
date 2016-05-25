@@ -1,3 +1,17 @@
+
+//======================================================================
+ //
+ //        Copyright (C) 2016   
+ //        All rights reserved
+ //
+ //        filename :Fragment11
+ //        
+ //
+ //        created by Qiangqiang Jinag in  2016.05.25
+ //        https://github.com/qiracle
+ //		   qiracle@foxmail.com
+ //
+ //======================================================================
 package qq.qiracle.fragment;
 
 import java.io.BufferedOutputStream;
