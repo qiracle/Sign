@@ -2,11 +2,14 @@ package qq.qiracle.main;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.Window;
 import qq.qiracle.fragment.Fragment1;
+import qq.qiracle.fragment.Fragment11;
 import qq.qiracle.fragment.MenuFragment;
 import qq.qiracle.qwords.R;
 
@@ -27,10 +30,6 @@ public class MainActivity extends SlidingFragmentActivity {
 		setBehindContentView(R.layout.menu);
 		setContentView(R.layout.content);
 
-		/*默认显示第一个Fragment*/
-	Fragment1 f1 =new Fragment1();
-	getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f1).commit();
-	
 		sm = getSlidingMenu();
 
 		sm.setMode(SlidingMenu.LEFT);
@@ -45,6 +44,27 @@ public class MainActivity extends SlidingFragmentActivity {
 		MenuFragment menuFragment = new MenuFragment();
 
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, menuFragment, "Menu").commit();
+
+		/* 默认显示第一个Fragment */
+
+		Intent intent = getIntent();
+		int type = intent.getIntExtra("type", 0);
+		if (type == 1) {
+
+			Bundle bundle = new Bundle();
+			bundle.putInt("flag", 1);
+			menuFragment.setArguments(bundle);
+			Fragment1 f1 = new Fragment1();
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f1).commit();
+		}
+
+		if (type == 2) {
+			Bundle bundle = new Bundle();
+			bundle.putInt("flag", 2);
+			menuFragment.setArguments(bundle);
+			Fragment11 f11 = new Fragment11();
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f11).commit();
+		}
 
 	}
 

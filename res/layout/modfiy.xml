@@ -10,20 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <EditText
-        android:id="@+id/et_reg_user"
-        android:layout_width="fill_parent"
-        android:layout_height="45dip"
-        android:layout_marginTop="30dip"
-        android:background="@drawable/txtborder"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:hint="@string/reg_user"
-        android:maxLength="30"
-        android:paddingRight="2dp"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColorHighlight="#7e4d84" />
+
 
     <EditText
         android:id="@+id/et_pwd"
@@ -67,28 +54,7 @@
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
-        <RadioGroup
-            android:layout_marginTop="15dp"
-        android:id="@+id/radioGroup2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:checked="true"
-            android:id="@+id/rb_mod_student"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/student" />
-
-        <RadioButton
-            android:id="@+id/rb_mod_teacher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/teacher" />
-    </RadioGroup>
+   
 
     <LinearLayout
         android:layout_width="match_parent"

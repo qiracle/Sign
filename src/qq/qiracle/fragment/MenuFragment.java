@@ -52,7 +52,7 @@ public class MenuFragment extends Fragment implements OnItemClickListener {
 
 	private List<String> initData() {
 		List<String> list = new ArrayList<String>();
-		list.add("登入");
+		list.add("签到");
 		list.add("修改密码");
 		list.add("设置");
 		
@@ -73,8 +73,15 @@ public class MenuFragment extends Fragment implements OnItemClickListener {
 		switch (position) {
 		
 		case 0:
+			Bundle bundle = getArguments();
+			int flag = bundle.getInt("flag");
+			
+			if(flag==1){
 			f= new Fragment1();
-
+			}
+			if(flag ==2){
+				f= new Fragment11();
+			}
 			break;
 
 		case 1:

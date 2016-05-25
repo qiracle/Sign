@@ -1,21 +1,21 @@
 
 //======================================================================
- //
- //        Copyright (C) 2016   
- //        All rights reserved
- //
- //        filename :Fragment2
- //        
- //
- //        created by Qiangqiang Jinag in  2016.04
- //        https://github.com/qiracle
- //		   qiracle@foxmail.com
- //
- //======================================================================
+//
+//        Copyright (C) 2016   
+//        All rights reserved
+//
+//        filename :Fragment2
+//        
+//
+//        created by Qiangqiang Jinag in  2016.04
+//        https://github.com/qiracle
+//		   qiracle@foxmail.com
+//
+//======================================================================
 
 package qq.qiracle.fragment;
 
-
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,18 +30,19 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import qq.qiracle.loginActivity.LoginActivity;
 import qq.qiracle.qwords.R;
 import qq.qiracle.userservice.ServiceRulesException;
 import qq.qiracle.userservice.UserService;
 import qq.qiracle.userservice.UserServiceImpl;
 
 public class Fragment2 extends Fragment {
-	
+
 	public static final String MSG_SERVER_ERROR = "服务器错误";
-	
+
 	View view;
 	// private MyDatabaseHelper dbHelper;
-	private EditText et_reg_user;
+
 	private EditText et_pwd;
 	private EditText et_reg_pwd;
 	private EditText et_reg_pwds;
@@ -49,7 +50,6 @@ public class Fragment2 extends Fragment {
 	private Button clear;
 	private Drawable mIconPerson;
 	private Drawable mIconLock;
-	private RadioGroup rg_group;
 	private UserService userService = new UserServiceImpl();
 
 	private void init() {
@@ -57,8 +57,8 @@ public class Fragment2 extends Fragment {
 		mIconPerson.setBounds(5, 1, 60, 50);
 		mIconLock = getResources().getDrawable(R.drawable.txt_lock_icon);
 		mIconLock.setBounds(5, 1, 60, 50);
-		et_reg_user = (EditText) view.findViewById(R.id.et_reg_user);
-		et_reg_user.setCompoundDrawables(mIconPerson, null, null, null);
+
+		
 		et_pwd = (EditText) view.findViewById(R.id.et_pwd);
 		et_pwd.setCompoundDrawables(mIconLock, null, null, null);
 		et_reg_pwd = (EditText) view.findViewById(R.id.et_reg_pwd);
@@ -68,31 +68,28 @@ public class Fragment2 extends Fragment {
 
 		reg = (Button) view.findViewById(R.id.reg);
 		clear = (Button) view.findViewById(R.id.clear);
-		rg_group = (RadioGroup) view.findViewById(R.id.radioGroup2);
+		
 
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.register, null);
+		view = inflater.inflate(R.layout.modfiy, null);
 
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
 
-		
 		init();
 
-		
 		clear.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				et_reg_user.setText("");
 				et_pwd.setText("");
 				et_reg_pwd.setText("");
 				et_reg_pwds.setText("");
-				
+
 			}
 		});
 
@@ -100,18 +97,20 @@ public class Fragment2 extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				Intent intent = getActivity().getIntent();
+				final String username = intent.getStringExtra("Username");
+				final int type = intent.getIntExtra("type", 0);
 
-				final String username = et_reg_user.getText().toString().trim();
 				final String password = et_pwd.getText().toString().trim();
 				final String newpwd = et_reg_pwd.getText().toString().trim();
 				String newpwds = et_reg_pwds.getText().toString().trim();
 
-				if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-					Toast.makeText(getActivity(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
-					return;
-				}
+//				if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+//					Toast.makeText(getActivity(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
+//					return;
+//				}
 
-				else if (TextUtils.isEmpty(newpwd) || TextUtils.isEmpty(newpwds)) {
+				 if (TextUtils.isEmpty(newpwd) || TextUtils.isEmpty(newpwds)) {
 					Toast.makeText(getActivity(), "新密码和确认密码不能为空", Toast.LENGTH_SHORT).show();
 					return;
 				} else if (!newpwd.equals(newpwds)) {
@@ -129,14 +128,8 @@ public class Fragment2 extends Fragment {
 						public void run() {
 							boolean state = false;
 							try {
-								int radioButtonId = rg_group.getCheckedRadioButtonId();
-								int type = 0;
-								switch(radioButtonId){
-								
-							
-								case R.id.rb_mod_student:
-									type = 1;
-									state = userService.modifyPwd(username, password, newpwd,type);
+				
+									state = userService.modifyPwd(username, password, newpwd, type);
 									if (state == true) {
 
 										getActivity().runOnUiThread(new Runnable() {
@@ -144,58 +137,31 @@ public class Fragment2 extends Fragment {
 												Toast.makeText(getActivity(), "密码修改成功", Toast.LENGTH_SHORT).show();
 											}
 										});
-										
+										Intent intent = new Intent(getActivity(),LoginActivity.class);
+										startActivity(intent);
+										getActivity().finish();
 
-									}else{
-										
+									} else {
+
 										getActivity().runOnUiThread(new Runnable() {
 											public void run() {
 												Toast.makeText(getActivity(), "用户名或原密码错误", Toast.LENGTH_SHORT).show();
 											}
 										});
 									}
-									
-									break;
-									
-								case R.id.rb_mod_teacher:
-									type = 2;
-									state = userService.modifyPwd(username, password, newpwd,type);
-									if (state == true) {
 
-										getActivity().runOnUiThread(new Runnable() {
-											public void run() {
-												Toast.makeText(getActivity(), "密码修改成功", Toast.LENGTH_SHORT).show();
-											}
-										});
-										
+				
 
-									}else{
-										
-										getActivity().runOnUiThread(new Runnable() {
-											public void run() {
-												Toast.makeText(getActivity(), "用户名或原密码错误", Toast.LENGTH_SHORT).show();
-											}
-										});
-									}
-									
-									break;
-								
-								}
-								
-							
-								
-								
-							}catch(final ServiceRulesException e) {
-								
+							} catch (final ServiceRulesException e) {
+
 								getActivity().runOnUiThread(new Runnable() {
 									public void run() {
 										Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
 									}
 								});
-								
+
 							}
-							
-							
+
 							catch (Exception e) {
 
 								e.printStackTrace();
@@ -212,7 +178,5 @@ public class Fragment2 extends Fragment {
 
 		return view;
 	}
-
-
 
 }

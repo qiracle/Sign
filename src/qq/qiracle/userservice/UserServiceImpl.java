@@ -30,7 +30,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import com.ericssonlabs.StudentMainActivity;
+
 
 import qq.qiracle.fragment.Fragment1;
 import qq.qiracle.fragment.Fragment2;
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 
 		if (statusCode != HttpStatus.SC_OK) {
 
-			throw new ServiceRulesException(StudentMainActivity.MSG_SERVER_ERROR);
+			throw new ServiceRulesException(Fragment1.MSG_SERVER_ERROR);
 			
 		}
 		String result = EntityUtils.toString(response.getEntity(),"UTF-8");

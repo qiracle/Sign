@@ -1,4 +1,4 @@
-package com.ericssonlabs;
+package qq.qiracle.fragment;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -14,27 +14,31 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.zxing.encoding.EncodingHandler;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import qq.qiracle.loginActivity.LoginActivity;
 import qq.qiracle.main.MainActivity;
 import qq.qiracle.qwords.R;
 import qq.qiracle.systemservice.SystemService;
 import qq.qiracle.systemservice.SystemServiceImpl;
 import qq.qiracle.userservice.ServiceRulesException;
 
-
-public class TeacherMainActivity extends Activity {
+public class Fragment11 extends Fragment{
+	View view;
 	Button btnExitTeacher;
 	TextView teacher_num;
 	private ImageView qrImgImageView;
@@ -45,39 +49,38 @@ public class TeacherMainActivity extends Activity {
 	private String teacherNum;
 	
 	private SystemService systemService = new SystemServiceImpl();
-
-
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.teacher_main);
-
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.teacher_main, null);
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+				RelativeLayout.LayoutParams.MATCH_PARENT);
+		view.setLayoutParams(lp);
 		
-		qrImgImageView = (ImageView) this.findViewById(R.id.iv_qr_image);
-	    teacher_num = (TextView) this.findViewById(R.id.tv_teacher);
-		 btnExitTeacher = (Button) findViewById(R.id.btn_exit_teacher);
-		 btnExitTeacher.setOnClickListener(new OnClickListener() {
+		qrImgImageView = (ImageView) view.findViewById(R.id.iv_qr_image);
+	    teacher_num = (TextView) view.findViewById(R.id.tv_teacher);
+		 btnExitTeacher = (Button) view.findViewById(R.id.btn_exit_teacher);
+		 btnExitTeacher.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(TeacherMainActivity.this);
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 					
-					dialogBuilder.setTitle("æ³¨æ„ï¼");
-					dialogBuilder.setMessage("æ‚¨ç¡®å®šè¦é€€å‡ºå—ï¼Ÿ");
+					dialogBuilder.setTitle("×¢Òâ£¡");
+					dialogBuilder.setMessage("ÄúÈ·¶¨ÒªÍË³öÂð£¿");
 				
-					dialogBuilder.setPositiveButton("ç¡®å®š", 
+					dialogBuilder.setPositiveButton("È·¶¨", 
 							new DialogInterface.OnClickListener() {
 						
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							
-						Intent intent	=new Intent(TeacherMainActivity.this,MainActivity.class);
+						Intent intent	=new Intent(getActivity(),LoginActivity.class);
 						
 						startActivity(intent);
-						finish();
+						getActivity().finish();
 						}
 					});
-					dialogBuilder.setNegativeButton("å–æ¶ˆ", 
+					dialogBuilder.setNegativeButton("È¡Ïû", 
 							new DialogInterface.OnClickListener() {
 						
 						@Override
@@ -93,89 +96,87 @@ public class TeacherMainActivity extends Activity {
 					
 				}
 			});
-	    
-	    
-		Intent intent = getIntent();
-		teacherNum = intent.getStringExtra("TeacherNum");
-		teacher_num.setText("æ‚¨å¥½ï¼Œæ‚¨çš„æ•™å·¥å·ä¸º"+teacherNum);
 		
+		 Intent intent = getActivity().getIntent();
+			teacherNum = intent.getStringExtra("Username");
+			teacher_num.setText("ÄúºÃ£¬ÄúµÄ½Ì¹¤ºÅÎª"+teacherNum);
+			
 
 
-		Button generateQRCodeButton = (Button) this
-				.findViewById(R.id.btn_add_qrcode);
-		generateQRCodeButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				try {
-				
-					 long currentTimeMillis = System.currentTimeMillis();
-					 final String s = Long.toString(currentTimeMillis);
-					final String contentString = s;
+			Button generateQRCodeButton = (Button) view
+					.findViewById(R.id.btn_add_qrcode);
+			generateQRCodeButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
 					
-					new Thread(new Runnable() {
+						 long currentTimeMillis = System.currentTimeMillis();
+						 final String s = Long.toString(currentTimeMillis);
+						final String contentString = s;
 						
-						@Override
-						public void run() {
-							boolean state = false;
-							try {
-								state = systemService.setStringQrcode(contentString);
-							} catch(final ServiceRulesException e) {
-								
-								runOnUiThread(new Runnable() {
-									public void run() {
-										Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-									}
-								});
-								
-							}catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							if(!state){
-								runOnUiThread(new Runnable() {
+						new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								boolean state = false;
+								try {
+									state = systemService.setStringQrcode(contentString);
+								} catch(final ServiceRulesException e) {
 									
-									@Override
-									public void run() {
-										Toast.makeText(getApplicationContext(), "æœåŠ¡å™¨å‡ºé”™", Toast.LENGTH_SHORT).show();;
+									getActivity().runOnUiThread(new Runnable() {
+										public void run() {
+											Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+										}
+									});
+									
+								}catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								if(!state){
+									getActivity().runOnUiThread(new Runnable() {
 										
-									}
-								});
-								
+										@Override
+										public void run() {
+											Toast.makeText(getActivity(), "·þÎñÆ÷³ö´í", Toast.LENGTH_SHORT).show();;
+											
+										}
+									});
+									
+								}
 							}
-						}
-					}){
+						}){
+							
+						}.start();
+					
 						
-					}.start();
-				
-					
-					
-					
-					if (contentString != null
-							&& contentString.trim().length() > 0) {
-						// æ ¹æ®å­—ç¬¦ä¸²ç”ŸæˆäºŒç»´ç å›¾ç‰‡å¹¶æ˜¾ç¤ºåœ¨ç•Œé¢ä¸Šï¼Œç¬¬äºŒä¸ªå‚æ•°ä¸ºå›¾ç‰‡çš„å¤§å°ï¼ˆ1000*1000ï¼‰
-						Bitmap qrCodeBitmap = EncodingHandler.createQRCode(
-								contentString, 1000);
-						saveJpeg(qrCodeBitmap);
-						qrImgImageView.setImageBitmap(qrCodeBitmap);
-					} else {
-						Toast.makeText(TeacherMainActivity.this,
-								"æ–‡æœ¬ä¸èƒ½ä¸ºç©º", Toast.LENGTH_SHORT)
-								.show();
+						
+						
+						if (contentString != null
+								&& contentString.trim().length() > 0) {
+							// ¸ù¾Ý×Ö·û´®Éú³É¶þÎ¬ÂëÍ¼Æ¬²¢ÏÔÊ¾ÔÚ½çÃæÉÏ£¬µÚ¶þ¸ö²ÎÊýÎªÍ¼Æ¬µÄ´óÐ¡£¨1000*1000£©
+							Bitmap qrCodeBitmap = EncodingHandler.createQRCode(
+									contentString, 1000);
+							saveJpeg(qrCodeBitmap);
+							qrImgImageView.setImageBitmap(qrCodeBitmap);
+						} else {
+							Toast.makeText(getActivity(),
+									"ÎÄ±¾²»ÄÜÎª¿Õ", Toast.LENGTH_SHORT)
+									.show();
+						}
+
+					} catch (WriterException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-
-				} catch (WriterException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-			}
-		});
+			});
 
 
-
+		return view;
 	}
-
 	public Bitmap cretaeBitmap(String str) throws WriterException {
 
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
@@ -244,6 +245,4 @@ public class TeacherMainActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
-
-
 }

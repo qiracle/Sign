@@ -1,297 +1,115 @@
 
 //======================================================================
- //
- //        Copyright (C) 2016   
- //        All rights reserved
- //
- //        filename :Fragment1
- //        
- //
- //        created by Qiangqiang Jinag in  2016.04
- //        https://github.com/qiracle
- //		   qiracle@foxmail.com
- //
- //======================================================================
+//
+//        Copyright (C) 2016   
+//        All rights reserved
+//
+//        filename :Fragment1
+//        
+//
+//        created by Qiangqiang Jinag in  2016.04
+//        https://github.com/qiracle
+//		   qiracle@foxmail.com
+//
+//======================================================================
 package qq.qiracle.fragment;
 
-import com.ericssonlabs.StudentMainActivity;
-import com.ericssonlabs.TeacherMainActivity;
+import com.zxing.activity.CaptureActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import qq.qiracle.bordercast.NetWorkChangeReceiver;
+import qq.qiracle.loginActivity.LoginActivity;
+
 import qq.qiracle.qwords.R;
 import qq.qiracle.userservice.ServiceRulesException;
 import qq.qiracle.userservice.UserService;
 import qq.qiracle.userservice.UserServiceImpl;
-import qq.qiracle.utils.Util;
 
 public class Fragment1 extends Fragment {
-
-	//private static final int FLAG_REGISTER_SUCCESS = 1;
-
-	//private static final String MSG_REGISTER_ERROR = "注册出错。";
-	//private static final String MSG_REGISTER_SUCCESS = "注册成功。";
-	public static final String MSG_LOGIN_FAILED = "登录失败";
-	public static final String MSG_SERVER_ERROR = "请求服务器错误。";
-	public static final String MSG_REQUEST_TIMEOUT = "请求服务器超时。";
-	public static final String MSG_RESPONSE_TIMEOUT = "服务器响应超时。";
-
 	View view;
-	SharedPreferences sp;
-	
-	private Button bt;
+	private TextView resultTextView;
+	private TextView usertext;
+	private Button btnExit;
+	private static final int IMAGE_HALFWIDTH = 20;
+	int[] pixels = new int[2 * IMAGE_HALFWIDTH * 2 * IMAGE_HALFWIDTH];
 
-	private EditText et_login_user;
-	private EditText et_login_pwd;
-	private CheckBox cb_ischeck;
+	private final int SCANER_CODE = 1;
+	private String username;
 
-	private Drawable mIconPerson;
-	private Drawable mIconLock;
-	private ImageView loginImage;
-	private TextView topText;
-
-	private RadioGroup rg_group;
-	private UserService userService = new UserServiceImpl();
-	private NetWorkChangeReceiver netWorkChangeReceiver =new NetWorkChangeReceiver();
-	private IntentFilter intentFilter;
-	@SuppressWarnings("deprecation")
-	private void init() {
-		topText = (TextView) view.findViewById(R.id.topname);
-		topText.setTextColor(Color.MAGENTA);
-		topText.setTextSize(24.0f);
-		topText.setTypeface(Typeface.MONOSPACE, Typeface.BOLD_ITALIC);
-		// 使用TextPaint的仿“粗体”设置setFakeBoldText为true。目前还无法支持仿“斜体”方法
-	
-
-		mIconPerson = getResources().getDrawable(R.drawable.txt_person_icon);
-		mIconPerson.setBounds(5, 1, 60, 50);
-		mIconLock = getResources().getDrawable(R.drawable.txt_lock_icon);
-		mIconLock.setBounds(5, 1, 60, 50);
-		loginImage = (ImageView) view.findViewById(R.id.loginImage);
-		loginImage.setBackgroundDrawable(new BitmapDrawable(Util.toRoundBitmap(getActivity(), "qiandao.jpg")));
-		loginImage.getBackground().setAlpha(0);
-		loginImage.setImageBitmap(Util.toRoundBitmap(getActivity(), "qiandao.jpg"));
-
-		bt = (Button) view.findViewById(R.id.login);
-		et_login_user = (EditText) view.findViewById(R.id.et_login_user);
-		et_login_user.setCompoundDrawables(mIconPerson, null, null, null);
-		et_login_pwd = (EditText) view.findViewById(R.id.et_login_pwd);
-		et_login_pwd.setCompoundDrawables(mIconLock, null, null, null);
-		cb_ischeck = (CheckBox) view.findViewById(R.id.cb_ischeck);
-		
-		
-		rg_group = (RadioGroup)view.findViewById(R.id.radioGroup1);
-
-	}
-
-	private void rememberPwd() {
-		// 从config.xml里读取学号密码
-		sp = getActivity().getSharedPreferences("config", 0);
-		String name = sp.getString("name", "");
-		String pwd = sp.getString("pwd", "");
-		String isChecked = sp.getString("check", "false");
-
-		et_login_user.setText(name);
-		et_login_pwd.setText(pwd);
-		if ("true".equals(isChecked)) {
-			cb_ischeck.setChecked(true);
-		}
-
-	}
-	public void netWork(){
-		
-		intentFilter = new IntentFilter();
-		intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-		getActivity().registerReceiver(netWorkChangeReceiver, intentFilter);
-	}
-
+	public static final String MSG_SERVER_ERROR = "请求服务器错误。";
+	private UserService userservice = new UserServiceImpl();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		view = inflater.inflate(R.layout.login, null);
+		view = inflater.inflate(R.layout.student_main, null);
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
 				RelativeLayout.LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
-		netWork();
-	
-		init();
 
-		rememberPwd();
+		resultTextView = (TextView) view.findViewById(R.id.tv_scan_result);
+		usertext = (TextView) view.findViewById(R.id.tv_user);
+		btnExit = (Button) view.findViewById(R.id.btn_exit);
 
-		bt.setOnClickListener(new View.OnClickListener() {
+		btnExit.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+
+				dialogBuilder.setTitle("注意！");
+				dialogBuilder.setMessage("您确定要退出吗？");
+
+				dialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						Intent intent = new Intent(getActivity(), LoginActivity.class);
+
+						startActivity(intent);
+						getActivity().finish();
+					}
+				});
+				dialogBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+				});
+
+				dialogBuilder.show();
+
+			}
+		});
+
+		Intent intent = getActivity().getIntent();
+		username = intent.getStringExtra("Username");
+		usertext.setText("您好，您的学号为" + username);
+
+		Button scanBarCodeButton = (Button) view.findViewById(R.id.btn_scan_barcode);
+		scanBarCodeButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-				
-				
-				final String name = et_login_user.getText().toString().trim();
-				final String pwd = et_login_pwd.getText().toString().trim();
-
-				if (TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd)) {
-					Toast.makeText(getActivity(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
-				} else {
-
-					Thread thread = new Thread(new Runnable() {
-
-						@Override
-						public void run() {
-							boolean state = false;
-							try {
-							
-								int radioButtonId = rg_group.getCheckedRadioButtonId();
-								int type = 0;
-								switch(radioButtonId){
-								case R.id.rb_student:
-									type = 1;
-									state = userService.userLogin(name, pwd,type);
-									if (state == true) {
-
-								
-										getActivity().runOnUiThread(new Runnable() {
-											public void run() {
-												Toast.makeText(getActivity(), "登入成功", Toast.LENGTH_SHORT).show();
-											}
-										});
-										/*******
-										 * 下面执行登入成功后界面的逻辑 -
-										 ***********************/
-										
-										
-										
-										Intent intent = new Intent(getActivity(), StudentMainActivity.class);
-										intent.putExtra("Username", name);
-										
-										
-										getActivity().setResult(0,intent);
-										
-										startActivity(intent);
-										
-										getActivity().finish();
-
-									}else{
-										
-										getActivity().runOnUiThread(new Runnable() {
-											public void run() {
-												Toast.makeText(getActivity(), "学号或密码错误", Toast.LENGTH_SHORT).show();
-											}
-										});
-									}
-									
-									break;
-									
-								case R.id.rb_teacher:
-									
-									
-									
-									
-									
-									type = 2;
-									state = userService.userLogin(name, pwd,type);
-									if (state == true) {
-
-								
-										getActivity().runOnUiThread(new Runnable() {
-											public void run() {
-												Toast.makeText(getActivity(), "登入成功", Toast.LENGTH_SHORT).show();
-											}
-										});
-										/*******
-										 * 下面执行登入成功后界面的逻辑 -
-										 ***********************/
-										
-										
-										
-										Intent intent = new Intent(getActivity(), TeacherMainActivity.class);
-										intent.putExtra("TeacherNum", name);
-										
-										
-										getActivity().setResult(10,intent);
-								
-										startActivity(intent);
-										getActivity().finish();
-									}else{
-										
-										getActivity().runOnUiThread(new Runnable() {
-											public void run() {
-												Toast.makeText(getActivity(), "教工号或密码错误", Toast.LENGTH_SHORT).show();
-											}
-										});
-									}
-							
-									
-									break;
-									
-								
-								}
-								
-							
-								
-								
-							}catch(final ServiceRulesException e) {
-								
-								getActivity().runOnUiThread(new Runnable() {
-									public void run() {
-										Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-									}
-								});
-								
-							}
-							
-							
-							catch (Exception e) {
-
-								e.printStackTrace();
-							}
-
-						}
-
-					});
-					thread.start();
-
-					/*********************************************/
-					if (cb_ischeck.isChecked()) {
-						Editor edit = sp.edit();
-						edit.putString("name", name);
-						edit.putString("pwd", pwd);
-						edit.putString("check", "true");
-						edit.commit();
-
-					} else {
-						Editor edit = sp.edit();
-						edit.putString("name", "");
-						edit.putString("pwd", "");
-						edit.putString("check", "false");
-						edit.commit();
-
-					}
-
-				}
-
+				Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
+				startActivityForResult(openCameraIntent, SCANER_CODE);
 			}
-
 		});
 
 		return view;
@@ -299,13 +117,57 @@ public class Fragment1 extends Fragment {
 	}
 
 	@Override
-	public void onDestroy() {
-		
-		super.onDestroy();
-		getActivity().unregisterReceiver(netWorkChangeReceiver);
-	}
-	
-	
-	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 
+		getActivity();
+		if (resultCode == Activity.RESULT_OK) {
+			if (requestCode == SCANER_CODE) {
+				Bundle bundle = data.getExtras();
+				final String scanResult = bundle.getString("result");
+
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+
+							final boolean state = userservice.sign(scanResult, username);
+							getActivity().runOnUiThread(new Runnable() {
+
+								@Override
+								public void run() {
+									if (state) {
+										resultTextView.setText("签到成功");
+										// resultTextView.setText("签到成功"+scanResult+"--"+username);
+										Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT).show();
+
+									} else {
+										resultTextView.setText("签到失败");
+										Toast.makeText(getActivity(), "签到失败", Toast.LENGTH_SHORT).show();
+									}
+
+								}
+							});
+
+						} catch (final ServiceRulesException e) {
+
+							getActivity().runOnUiThread(new Runnable() {
+								public void run() {
+									Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+								}
+							});
+
+						} catch (Exception e) {
+
+							e.printStackTrace();
+						}
+
+					}
+				}).start();
+
+			}
+
+		}
+	}
 }
