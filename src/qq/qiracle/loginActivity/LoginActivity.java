@@ -1,3 +1,18 @@
+
+//======================================================================
+ //
+ //        Copyright (C) 2016   
+ //        All rights reserved
+ //
+ //        filename :loginActivity
+ //        
+ //
+ //        created by Qiangqiang Jinag in  2016.05.25
+ //        https://github.com/qiracle
+ //		   qiracle@foxmail.com
+ //
+ //======================================================================
+
 package qq.qiracle.loginActivity;
 
 
