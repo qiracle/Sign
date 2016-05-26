@@ -1,17 +1,17 @@
 
 //======================================================================
- //
- //        Copyright (C) 2016   
- //        All rights reserved
- //
- //        filename :Fragment11
- //        
- //
- //        created by Qiangqiang Jinag in  2016.05.25
- //        https://github.com/qiracle
- //		   qiracle@foxmail.com
- //
- //======================================================================
+//
+//        Copyright (C) 2016   
+//        All rights reserved
+//
+//        filename :Fragment11
+//        
+//
+//        created by Qiangqiang Jinag in  2016.05.25
+//        https://github.com/qiracle
+//		   qiracle@foxmail.com
+//
+//======================================================================
 package qq.qiracle.fragment;
 
 import java.io.BufferedOutputStream;
@@ -40,7 +40,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +53,7 @@ import qq.qiracle.systemservice.SystemService;
 import qq.qiracle.systemservice.SystemServiceImpl;
 import qq.qiracle.userservice.ServiceRulesException;
 
-public class Fragment11 extends Fragment{
+public class Fragment11 extends Fragment {
 	View view;
 	Button btnExitTeacher;
 	TextView teacher_num;
@@ -61,136 +63,123 @@ public class Fragment11 extends Fragment{
 	private Bitmap mBitmap;
 
 	private String teacherNum;
-	
+
 	private SystemService systemService = new SystemServiceImpl();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.teacher_main, null);
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
+		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+				FrameLayout.LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
-		
+
 		qrImgImageView = (ImageView) view.findViewById(R.id.iv_qr_image);
-	    teacher_num = (TextView) view.findViewById(R.id.tv_teacher);
-		 btnExitTeacher = (Button) view.findViewById(R.id.btn_exit_teacher);
-		 btnExitTeacher.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-					
-					dialogBuilder.setTitle("注意！");
-					dialogBuilder.setMessage("您确定要退出吗？");
-				
-					dialogBuilder.setPositiveButton("确定", 
-							new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							
-						Intent intent	=new Intent(getActivity(),LoginActivity.class);
-						
+		teacher_num = (TextView) view.findViewById(R.id.tv_teacher);
+		btnExitTeacher = (Button) view.findViewById(R.id.btn_exit_teacher);
+		btnExitTeacher.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+
+				dialogBuilder.setTitle("注意！");
+				dialogBuilder.setMessage("您确定要退出吗？");
+
+				dialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						Intent intent = new Intent(getActivity(), LoginActivity.class);
+
 						startActivity(intent);
 						getActivity().finish();
-						}
-					});
-					dialogBuilder.setNegativeButton("取消", 
-							new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							
-						}
-					});
-					
-					
-					
-					dialogBuilder.show();
-					
-					
-				}
-			});
-		
-		 Intent intent = getActivity().getIntent();
-			teacherNum = intent.getStringExtra("Username");
-			teacher_num.setText("您好，您的教工号为"+teacherNum);
-			
-
-
-			Button generateQRCodeButton = (Button) view
-					.findViewById(R.id.btn_add_qrcode);
-			generateQRCodeButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					try {
-					
-						 long currentTimeMillis = System.currentTimeMillis();
-						 final String s = Long.toString(currentTimeMillis);
-						final String contentString = s;
-						
-						new Thread(new Runnable() {
-							
-							@Override
-							public void run() {
-								boolean state = false;
-								try {
-									state = systemService.setStringQrcode(contentString);
-								} catch(final ServiceRulesException e) {
-									
-									getActivity().runOnUiThread(new Runnable() {
-										public void run() {
-											Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-										}
-									});
-									
-								}catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								if(!state){
-									getActivity().runOnUiThread(new Runnable() {
-										
-										@Override
-										public void run() {
-											Toast.makeText(getActivity(), "服务器出错", Toast.LENGTH_SHORT).show();;
-											
-										}
-									});
-									
-								}
-							}
-						}){
-							
-						}.start();
-					
-						
-						
-						
-						if (contentString != null
-								&& contentString.trim().length() > 0) {
-							// 根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（1000*1000）
-							Bitmap qrCodeBitmap = EncodingHandler.createQRCode(
-									contentString, 1000);
-							saveJpeg(qrCodeBitmap);
-							qrImgImageView.setImageBitmap(qrCodeBitmap);
-						} else {
-							Toast.makeText(getActivity(),
-									"文本不能为空", Toast.LENGTH_SHORT)
-									.show();
-						}
-
-					} catch (WriterException e) {
-						e.printStackTrace();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
-				}
-			});
+				});
+				dialogBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+				});
+
+				dialogBuilder.show();
+
+			}
+		});
+
+		Intent intent = getActivity().getIntent();
+		teacherNum = intent.getStringExtra("Username");
+		teacher_num.setText("您好，您的教工号为" + teacherNum);
+
+		Button generateQRCodeButton = (Button) view.findViewById(R.id.btn_add_qrcode);
+		generateQRCodeButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+
+					long currentTimeMillis = System.currentTimeMillis();
+					final String s = Long.toString(currentTimeMillis);
+					final String contentString = s;
+
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							boolean state = false;
+							try {
+								state = systemService.setStringQrcode(contentString);
+							} catch (final ServiceRulesException e) {
+
+								getActivity().runOnUiThread(new Runnable() {
+									public void run() {
+										Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+									}
+								});
+
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							if (!state) {
+								getActivity().runOnUiThread(new Runnable() {
+
+									@Override
+									public void run() {
+										Toast.makeText(getActivity(), "服务器出错", Toast.LENGTH_SHORT).show();
+										;
+
+									}
+								});
+
+							}
+						}
+					}) {
+
+					}.start();
+
+					if (contentString != null && contentString.trim().length() > 0) {
+						// 根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（1000*1000）
+						Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 1000);
+						saveJpeg(qrCodeBitmap);
+						qrImgImageView.setImageBitmap(qrCodeBitmap);
+					} else {
+						Toast.makeText(getActivity(), "文本不能为空", Toast.LENGTH_SHORT).show();
+					}
+
+				} catch (WriterException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 
 		return view;
 	}
+
 	public Bitmap cretaeBitmap(String str) throws WriterException {
 
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
@@ -198,8 +187,7 @@ public class Fragment11 extends Fragment{
 		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
 		hints.put(EncodeHintType.MARGIN, 1);
 
-		BitMatrix matrix = new MultiFormatWriter().encode(str,
-				BarcodeFormat.QR_CODE, 300, 300, hints);
+		BitMatrix matrix = new MultiFormatWriter().encode(str, BarcodeFormat.QR_CODE, 300, 300, hints);
 		int width = matrix.getWidth();
 		int height = matrix.getHeight();
 		int halfW = width / 2;
@@ -207,11 +195,9 @@ public class Fragment11 extends Fragment{
 		int[] pixels = new int[width * height];
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (x > halfW - IMAGE_HALFWIDTH && x < halfW + IMAGE_HALFWIDTH
-						&& y > halfH - IMAGE_HALFWIDTH
+				if (x > halfW - IMAGE_HALFWIDTH && x < halfW + IMAGE_HALFWIDTH && y > halfH - IMAGE_HALFWIDTH
 						&& y < halfH + IMAGE_HALFWIDTH) {
-					pixels[y * width + x] = mBitmap.getPixel(x - halfW
-							+ IMAGE_HALFWIDTH, y - halfH + IMAGE_HALFWIDTH);
+					pixels[y * width + x] = mBitmap.getPixel(x - halfW + IMAGE_HALFWIDTH, y - halfH + IMAGE_HALFWIDTH);
 				} else {
 					if (matrix.get(x, y)) {
 						pixels[y * width + x] = 0xff000000;
@@ -221,8 +207,7 @@ public class Fragment11 extends Fragment{
 				}
 			}
 		}
-		Bitmap bitmap = Bitmap.createBitmap(width, height,
-				Bitmap.Config.ARGB_8888);
+		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 
 		return bitmap;
@@ -243,18 +228,15 @@ public class Fragment11 extends Fragment{
 		long dataTake = System.currentTimeMillis();
 		String jpegName = initSavePath() + dataTake + ".jpg";
 
-
 		try {
 			FileOutputStream fout = new FileOutputStream(jpegName);
 			BufferedOutputStream bos = new BufferedOutputStream(fout);
-
 
 			bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
 			bos.flush();
 			bos.close();
 
 		} catch (IOException e) {
-			
 
 			e.printStackTrace();
 		}

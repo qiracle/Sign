@@ -131,6 +131,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int header=0x7f060019;
         public static final int help_button_view=0x7f060003;
         public static final int help_view=0x7f060004;
+        public static final int light_blue=0x7f06001b;
         public static final int possible_result_points=0x7f060005;
         public static final int result_image_border=0x7f060006;
         public static final int result_minor_text=0x7f060007;
@@ -151,6 +152,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int viewfinder_frame=0x7f060016;
         public static final int viewfinder_laser=0x7f060017;
         public static final int viewfinder_mask=0x7f060018;
+        public static final int white=0x7f06001c;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -173,36 +175,42 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int bg1=0x7f020001;
         public static final int bg_border1=0x7f020002;
         public static final int biaoti=0x7f020003;
-        public static final int btn_exit=0x7f020004;
-        public static final int btn_login=0x7f020005;
-        public static final int btn_sign=0x7f020006;
-        public static final int clr_normal=0x7f020013;
-        public static final int clr_pressed=0x7f020014;
-        public static final int delete=0x7f020007;
-        public static final int delete_gray=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int menubg=0x7f02000a;
-        public static final int navbar=0x7f02000b;
-        public static final int qiandao=0x7f02000c;
-        public static final int saomiao=0x7f02000d;
-        public static final int shadow=0x7f02000e;
-        public static final int txt_lock_icon=0x7f02000f;
-        public static final int txt_person_icon=0x7f020010;
-        public static final int txtborder=0x7f020011;
-        public static final int zhuye=0x7f020012;
+        public static final int bitmap_book_read_chapterlist_repeat=0x7f020004;
+        public static final int biz_news_local_weather_bg_big=0x7f020005;
+        public static final int biz_pc_account_line=0x7f020006;
+        public static final int btn_exit=0x7f020007;
+        public static final int btn_login=0x7f020008;
+        public static final int btn_sign=0x7f020009;
+        public static final int clr_normal=0x7f020019;
+        public static final int clr_pressed=0x7f02001a;
+        public static final int delete=0x7f02000a;
+        public static final int delete_gray=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int ic_shelf_category_divider=0x7f02000d;
+        public static final int ic_top_bar_category=0x7f02000e;
+        public static final int menubg=0x7f02000f;
+        public static final int navbar=0x7f020010;
+        public static final int qiandao=0x7f020011;
+        public static final int saomiao=0x7f020012;
+        public static final int shadow=0x7f020013;
+        public static final int sign_sliding_bg=0x7f020014;
+        public static final int txt_lock_icon=0x7f020015;
+        public static final int txt_person_icon=0x7f020016;
+        public static final int txtborder=0x7f020017;
+        public static final int zhuye=0x7f020018;
     }
     public static final class id {
-        public static final int action_settings=0x7f050031;
+        public static final int action_settings=0x7f050033;
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f050006;
-        public static final int btn_add_qrcode=0x7f05002e;
+        public static final int btn_add_qrcode=0x7f050030;
         public static final int btn_cancel_scan=0x7f050014;
-        public static final int btn_exit=0x7f05002c;
-        public static final int btn_exit_teacher=0x7f050030;
-        public static final int btn_scan_barcode=0x7f05002a;
+        public static final int btn_exit=0x7f05002e;
+        public static final int btn_exit_teacher=0x7f050032;
+        public static final int btn_scan_barcode=0x7f05002c;
         public static final int cb_ischeck=0x7f050020;
-        public static final int clear=0x7f050027;
+        public static final int clear=0x7f050029;
         public static final int content_frame=0x7f050015;
         public static final int decode=0x7f050007;
         public static final int decode_failed=0x7f050008;
@@ -212,36 +220,38 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int encode_succeeded=0x7f05000b;
         public static final int et_login_pwd=0x7f05001c;
         public static final int et_login_user=0x7f05001b;
-        public static final int et_pwd=0x7f050023;
-        public static final int et_reg_pwd=0x7f050024;
-        public static final int et_reg_pwds=0x7f050025;
+        public static final int et_pwd=0x7f050025;
+        public static final int et_reg_pwd=0x7f050026;
+        public static final int et_reg_pwds=0x7f050027;
         public static final int fullscreen=0x7f050003;
-        public static final int iv_qr_image=0x7f05002f;
+        public static final int iv_qr_image=0x7f050031;
         public static final int launch_product_query=0x7f05000c;
         public static final int left=0x7f050000;
         public static final int list_view=0x7f050018;
         public static final int login=0x7f050021;
         public static final int loginImage=0x7f05001a;
         public static final int margin=0x7f050002;
-        public static final int menu_frame=0x7f050022;
+        public static final int menu_frame=0x7f050024;
         public static final int none=0x7f050004;
         public static final int preview_view=0x7f050012;
         public static final int quit=0x7f05000d;
         public static final int radioGroup1=0x7f05001d;
         public static final int rb_student=0x7f05001e;
         public static final int rb_teacher=0x7f05001f;
-        public static final int reg=0x7f050026;
+        public static final int reg=0x7f050028;
         public static final int restart_preview=0x7f05000e;
         public static final int return_scan_result=0x7f05000f;
         public static final int right=0x7f050001;
         public static final int search_book_contents_failed=0x7f050010;
         public static final int search_book_contents_succeeded=0x7f050011;
         public static final int selected_view=0x7f050005;
-        public static final int slidingmenumain=0x7f050028;
+        public static final int slidingmenumain=0x7f05002a;
+        public static final int topButton=0x7f050022;
+        public static final int topTv=0x7f050023;
         public static final int topname=0x7f050019;
-        public static final int tv_scan_result=0x7f05002b;
-        public static final int tv_teacher=0x7f05002d;
-        public static final int tv_user=0x7f050029;
+        public static final int tv_scan_result=0x7f05002d;
+        public static final int tv_teacher=0x7f05002f;
+        public static final int tv_user=0x7f05002b;
         public static final int viewfinder_view=0x7f050013;
         public static final int word_result=0x7f050016;
     }
@@ -251,12 +261,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int line_result=0x7f030002;
         public static final int list_view=0x7f030003;
         public static final int login=0x7f030004;
-        public static final int menu=0x7f030005;
-        public static final int modfiy=0x7f030006;
-        public static final int sign=0x7f030007;
-        public static final int slidingmenumain=0x7f030008;
-        public static final int student_main=0x7f030009;
-        public static final int teacher_main=0x7f03000a;
+        public static final int main_head=0x7f030005;
+        public static final int menu=0x7f030006;
+        public static final int modfiy=0x7f030007;
+        public static final int sign=0x7f030008;
+        public static final int slidingmenumain=0x7f030009;
+        public static final int student_main=0x7f03000a;
+        public static final int teacher_main=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -270,23 +281,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_name=0x7f080000;
         public static final int classSign=0x7f08000d;
         public static final int clear=0x7f08000e;
-        public static final int exitLogin=0x7f080014;
-        public static final int generate=0x7f080012;
+        public static final int exitLogin=0x7f080015;
+        public static final int generate=0x7f080013;
         public static final int login=0x7f080005;
         public static final int login_pwd=0x7f080004;
         public static final int login_user=0x7f080003;
         public static final int modfiy=0x7f08000b;
-        public static final int picDescription=0x7f080011;
+        public static final int picDescription=0x7f080012;
         public static final int pwd=0x7f080008;
         public static final int reg_pwd=0x7f080009;
         public static final int reg_pwds=0x7f08000a;
         public static final int reg_user=0x7f080007;
         public static final int rem_pwd=0x7f080006;
-        public static final int scanResult=0x7f080013;
+        public static final int scanResult=0x7f080014;
+        public static final int setting=0x7f08000f;
         public static final int sign=0x7f08000c;
-        public static final int student=0x7f08000f;
+        public static final int student=0x7f080010;
         public static final int study=0x7f080002;
-        public static final int teacher=0x7f080010;
+        public static final int teacher=0x7f080011;
     }
     public static final class style {
         /** 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   
+    
   <color name="bg_color">#EDEDED</color>
   <color name="contents_text">#ff000000</color>
   <color name="encode_view">#ffffffff</color>
@@ -28,5 +29,7 @@
   <color name="viewfinder_mask">#60000000</color>
   <color name="header">#58567D</color>
   <color name="grgray">#686868</color>
+  <color name="light_blue">#5CACEE</color>
+    <color name="white">#FFFFFFFF</color>
       
 </resources>

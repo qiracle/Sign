@@ -4,18 +4,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg1"
     android:orientation="vertical" >
-    
-    <!--  
-     <TextView 
-        android:text="课堂签到"
-		android:gravity="center"
-        android:textSize="25sp"
-      	android:textColor="#FFF"
-        android:background="@drawable/biaoti"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-    
-    -->
+   
    
 
     <TextView

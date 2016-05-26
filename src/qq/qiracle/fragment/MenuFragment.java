@@ -17,6 +17,8 @@ package qq.qiracle.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -70,9 +72,14 @@ public class MenuFragment extends Fragment implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Fragment f = null;
+		String title = null;
 		switch (position) {
 		
 		case 0:
+//			Intent intent = getActivity().getIntent();
+//			int type = intent.getIntExtra("type", 0);
+//			System.out.println("****"+type+"*****");
+			title = getString(R.string.classSign);
 			Bundle bundle = getArguments();
 			int flag = bundle.getInt("flag");
 			
@@ -85,10 +92,12 @@ public class MenuFragment extends Fragment implements OnItemClickListener {
 			break;
 
 		case 1:
+			title = getString(R.string.modfiy);
 			f= new Fragment2();
 			break;
 
 		case 2:
+			title = getString(R.string.setting);
 			f= new Fragment3();
 			break;
 
@@ -99,16 +108,16 @@ public class MenuFragment extends Fragment implements OnItemClickListener {
 		}
 		
 		
-		switchFragment(f);
+		switchFragment(f,title);
 
 	}
 
-	private void switchFragment(Fragment f) {
+	private void switchFragment(Fragment f,String title) {
 	if(f!=null){
 		
 		if(getActivity() instanceof MainActivity){
 			
-			((MainActivity)getActivity()).switchFragment(f);
+			((MainActivity)getActivity()).switchFragment(f,title);
 		}
 	}
 		
