@@ -145,7 +145,7 @@ public class LoginActivity extends Activity {
 
 				final String name = et_login_user.getText().toString().trim();
 				final String pwd = et_login_pwd.getText().toString().trim();
-
+				
 				if (TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd)) {
 					Toast.makeText(getApplicationContext(), "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
 				} else {
